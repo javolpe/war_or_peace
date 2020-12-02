@@ -1,4 +1,4 @@
-require './card'
+
 
 
 class Deck
@@ -30,7 +30,7 @@ class Deck
       end
     end
     percent = array.length.to_f/cards.length.to_f
-    "#{percent * 100}%"
+    (percent * 100).round(2)
   end
 
   def remove_card()
@@ -42,5 +42,3 @@ class Deck
   end
 
 end
-
-require 'pry'; binding.pry
