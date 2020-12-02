@@ -6,9 +6,6 @@ require './lib/player'
 
 
 class PlayerTest < Minitest::Test
-  def setup
-    player = Player.new('Clarissa', deck)
-  end
 
   def test_it_exists
     card1 = Card.new(:diamond, 'Queen', 12)
@@ -21,9 +18,13 @@ class PlayerTest < Minitest::Test
   end
 
   def test_it_has_readable_name_attribute
+    card1 = Card.new(:diamond, 'Queen', 12)
+    card2 = Card.new(:spade, '3', 3)
+    card3 = Card.new(:heart, 'Ace', 14)
+    deck = Deck.new([card1, card2, card3])
     player = Player.new('Clarissa', deck)
 
-    assert_equal 'Clarissa', player.name
+    assert_equal player.name, 'Clarissa'
   end
 
   def test_it_holds_cards_array_as_deck
@@ -44,13 +45,12 @@ class PlayerTest < Minitest::Test
     card3 = Card.new(:heart, 'Ace', 14)
     deck1 = Deck.new([card1, card2, card3])
     player1 = Player.new('Clarissa', deck1)
-
     card4 = Card.new(:diamond, '8', 8)
     card5 = Card.new(:spade, '2', 2)
     card6 = Card.new(:heart, '10', 10)
     deck2 = Deck.new([card4, card5, card6])
     player2 = Player.new('Amos', deck2)
-    player1.has_lost(player1.deck1.cards[0], player2.deck1.cards[0])
+    player1.has_lost(player1, player2)
 
     assert_equal(false, false)
   end
