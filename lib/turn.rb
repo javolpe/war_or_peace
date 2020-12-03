@@ -19,4 +19,18 @@ class Turn
     end
   end
 
+  def winner
+    if self.type == :basic && self.player1.deck.cards[0].rank > self.player2.deck.cards[0].rank
+      self.player1
+    elsif self.type == :basic && self.player1.deck.cards[0].rank < self.player2.deck.cards[0].rank
+      self.player2
+    elsif self.type == :war && self.player1.deck.cards[2].rank > self.player2.deck.cards[2].rank
+      self.player1
+    elsif self.type == :war && self.player1.deck.cards[2].rank < self.player2.deck.cards[2].rank
+      self.player2
+    else
+      "No Winner"
+    end
+  end
+
 end
