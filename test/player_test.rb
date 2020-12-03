@@ -45,14 +45,9 @@ class PlayerTest < Minitest::Test
     card3 = Card.new(:heart, 'Ace', 14)
     deck1 = Deck.new([card1, card2, card3])
     player1 = Player.new('Clarissa', deck1)
-    card4 = Card.new(:diamond, '8', 8)
-    card5 = Card.new(:spade, '2', 2)
-    card6 = Card.new(:heart, '10', 10)
-    deck2 = Deck.new([card4, card5, card6])
-    player2 = Player.new('Amos', deck2)
-    player1.has_lost(player1, player2)
 
-    assert_equal(false, false)
+
+    assert_equal(false, player1.has_lost?)
   end
 
   def test_remove_card

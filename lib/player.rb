@@ -8,11 +8,8 @@ class Player
     @deck = deck
   end
 
-  def has_lost(player1, player2)
-    if player1.deck.cards[0].rank > player2.deck.cards[0].rank
-      return false
-    else return true
-    end
+  def has_lost?
+    @deck.cards.empty?
   end
 
 end
