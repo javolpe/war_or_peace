@@ -21,13 +21,13 @@ class Turn
 
   def winner
     if self.type == :basic && self.player1.deck.cards[0].rank > self.player2.deck.cards[0].rank
-      self.player1
+      self.player1.name
     elsif self.type == :basic && self.player1.deck.cards[0].rank < self.player2.deck.cards[0].rank
-      self.player2
+      self.player2.name
     elsif self.type == :war && self.player1.deck.cards[2].rank > self.player2.deck.cards[2].rank
-      self.player1
+      self.player1.name
     elsif self.type == :war && self.player1.deck.cards[2].rank < self.player2.deck.cards[2].rank
-      self.player2
+      self.player2.name
     else
       "No Winner"
     end
@@ -37,14 +37,16 @@ class Turn
     if self.type == :basic
       @spoils_of_war << player1.deck.cards[0]
       @spoils_of_war << player2.deck.cards[0]
+      self.player1.deck.remove_card
+      self.player2.deck.remove_card
     elsif self.type == :war
       @spoils_of_war << player1.deck.cards[0]
       @spoils_of_war << player1.deck.cards[1]
       @spoils_of_war << player1.deck.cards[2]
-#tried this and it didn't work  @spoils_of_war << player1.deck.cards[0..2]
       @spoils_of_war << player2.deck.cards[0]
       @spoils_of_war << player2.deck.cards[1]
       @spoils_of_war << player2.deck.cards[2]
+  #tried this and it didn't work:  @spoils_of_war << player1.deck.cards[0..2]
     else
       3.times do
         self.player1.deck.remove_card
@@ -53,5 +55,14 @@ class Turn
     end
   end
 
+  def award_spoils
+    if self.winner == self.player1.name
+      player1.deck.cards << self.spoils_of_war
+    else
+      self.player2.deck.cards << self.spoils_of_war
+    end
+    @spoils_of_war = []
+  end
 
+require 'pry'; binding.pry
 end
