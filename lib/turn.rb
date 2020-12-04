@@ -54,7 +54,7 @@ class Turn
     end
   end
 
-  def award_spoils
+  def award_spoils(winner)
     turn_winner = winner
     pile_cards
     if turn_winner == player1.name
@@ -66,5 +66,5 @@ class Turn
     end
     @spoils_of_war = []
   end
-
+require 'pry'; binding.pry
 end

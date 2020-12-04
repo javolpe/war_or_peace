@@ -130,14 +130,15 @@ class TurnTest < Minitest::Test
     card8 = Card.new(:diamond, '2', 2)
 
     deck1 = Deck.new([card1, card2, card5, card8])
-    deck2 = Deck.new([card3, card4, card6, card7])
+    deck2 = Deck.new([card4, card3, card6, card7])
 
     player1 = Player.new('Megan', deck1)
     player2 = Player.new('Aurora', deck2)
     turn = Turn.new(player1, player2)
+    turn_winner = turn.winner
 
-    turn.award_spoils
-    wanted_array = [card2, card5, card8, card1, card3]
+    turn.award_spoils(turn_winner)
+    wanted_array = [card8]
 
     assert_equal turn.player1.deck.cards, wanted_array
 
