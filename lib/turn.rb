@@ -10,59 +10,61 @@ class Turn
   end
 
   def type
-    if self.player1.deck.cards[0].rank != self.player2.deck.cards[0].rank
+    if player1.deck.cards[0].rank != player2.deck.cards[0].rank
       :basic
-    elsif (self.player1.deck.cards[0].rank == self.player2.deck.cards[0].rank) && self.player1.deck.cards[2].rank == self.player2.deck.cards[2].rank
+    elsif (player1.deck.cards[0].rank == player2.deck.cards[0].rank) && player1.deck.cards[2].rank == player2.deck.cards[2].rank
       :mutually_assured_destruction
-    elsif self.player1.deck.cards[0].rank == self.player2.deck.cards[0].rank
+    elsif player1.deck.cards[0].rank == player2.deck.cards[0].rank
       :war
     end
   end
 
   def winner
-    if self.type == :basic && self.player1.deck.cards[0].rank > self.player2.deck.cards[0].rank
-      self.player1.name
-    elsif self.type == :basic && self.player1.deck.cards[0].rank < self.player2.deck.cards[0].rank
-      self.player2.name
-    elsif self.type == :war && self.player1.deck.cards[2].rank > self.player2.deck.cards[2].rank
-      self.player1.name
-    elsif self.type == :war && self.player1.deck.cards[2].rank < self.player2.deck.cards[2].rank
-      self.player2.name
+    if type == :basic && player1.deck.cards[0].rank > player2.deck.cards[0].rank
+      player1.name
+    elsif type == :basic && player1.deck.cards[0].rank < player2.deck.cards[0].rank
+      player2.name
+    elsif type == :war && player1.deck.cards[2].rank > player2.deck.cards[2].rank
+      player1.name
+    elsif type == :war && player1.deck.cards[2].rank < player2.deck.cards[2].rank
+      player2.name
     else
       "No Winner"
     end
   end
 
   def pile_cards
-    if self.type == :basic
+    if type == :basic
       @spoils_of_war << player1.deck.cards[0]
       @spoils_of_war << player2.deck.cards[0]
-      self.player1.deck.remove_card
-      self.player2.deck.remove_card
-    elsif self.type == :war
-      @spoils_of_war << player1.deck.cards[0]
-      @spoils_of_war << player1.deck.cards[1]
-      @spoils_of_war << player1.deck.cards[2]
-      @spoils_of_war << player2.deck.cards[0]
-      @spoils_of_war << player2.deck.cards[1]
-      @spoils_of_war << player2.deck.cards[2]
-  #tried this and it didn't work:  @spoils_of_war << player1.deck.cards[0..2]
+      player1.deck.remove_card
+      player2.deck.remove_card
+    elsif type == :war
+      @spoils_of_war << player1.deck.cards[0..2]
+      @spoils_of_war << player2.deck.cards[0..2]
+      3.times do
+        player1.deck.remove_card
+        player2.deck.remove_card
+      end
     else
       3.times do
-        self.player1.deck.remove_card
-        self.player2.deck.remove_card
+        player1.deck.remove_card
+        player2.deck.remove_card
       end
     end
   end
 
   def award_spoils
-    if self.winner == self.player1.name
-      player1.deck.cards << self.spoils_of_war
+    turn_winner = winner
+    pile_cards
+    if turn_winner == player1.name
+      player1.deck.cards << spoils_of_war
+      player1.deck.cards = player1.deck.cards.flatten
     else
-      self.player2.deck.cards << self.spoils_of_war
+      player2.deck.cards << spoils_of_war
+      player2.deck.cards = player2.deck.cards.flatten
     end
     @spoils_of_war = []
   end
 
-require 'pry'; binding.pry
 end

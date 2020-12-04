@@ -111,13 +111,15 @@ class TurnTest < Minitest::Test
 
 
    assert_equal turn.spoils_of_war, wanted_array
+   assert_equal player2.deck.cards[0], card4
+
 
 #    assert_equal turn.player1.deck.cards, wanted_array
 #use above assertion for testing :mutually_assured_destruction
 
   end
 
-  def test_award_spoilers
+  def test_award_spoils
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -133,7 +135,7 @@ class TurnTest < Minitest::Test
     player1 = Player.new('Megan', deck1)
     player2 = Player.new('Aurora', deck2)
     turn = Turn.new(player1, player2)
-    turn.pile_cards
+
     turn.award_spoils
     wanted_array = [card2, card5, card8, card1, card3]
 
