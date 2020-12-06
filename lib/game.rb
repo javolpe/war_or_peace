@@ -24,7 +24,7 @@ def make_deck
         end
       end
     end
-    deck = full_deck[0..51]
+    deck = full_deck
 end
 
 
@@ -53,24 +53,25 @@ class Game
 
   def start
     i =0
-    while i < 1001
+    while i < 5001
       i+=1
 
-if i == 600
-  require 'pry';binding.pry
-end
+# if i == 200
+#   require 'pry';binding.pry
+# end
+
       type = turn.type
       determine_winner = turn.winner
       turn.award_spoils(determine_winner)
 
-      if turn.player1.has_lost? == true || turn.the_loser == turn.player1.name
-         p "*~*~*~* Aurora has won the game! *~*~*~*"
-         break
-      elsif turn.player2.has_lost? == true || turn.the_loser == turn.player2.name
-        p "*~*~*~* Megan has won the game! *~*~*~*"
-        break
-      end
 
+        if turn.player1.has_lost? == true || turn.the_loser == turn.player1.name
+          p "*~*~*~* Aurora has won the game! *~*~*~*"
+          break
+        elsif turn.player2.has_lost? == true || turn.the_loser == turn.player2.name
+          p "*~*~*~* Megan has won the game! *~*~*~*"
+          break
+        end
 
 
         if determine_winner == turn.player1.name && type == :basic
@@ -90,7 +91,11 @@ end
 
 
 
-      if i == 1001
+
+
+
+
+      if i == 5000
         return p "---- DRAW ----"
       end
 

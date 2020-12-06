@@ -4,9 +4,15 @@ require './lib/player'
 require './lib/turn'
 require './lib/game'
 
+
+
 var1 = make_deck.shuffle
+
 var2=var1[0..25]
 var3=var1[26..51]
+
+var2.length
+var3.length
 
 deck1 = Deck.new(var2)
 deck2 = Deck.new(var3)
@@ -17,8 +23,7 @@ turn = Turn.new(player1, player2)
 
 new_game = Game.new(turn)
 
-
-
-p new_game.turn.player1.deck.cards.length
+#new_game.turn.player1.deck.cards
+#new_game.turn.player2.deck.cards
 
 new_game.intro
