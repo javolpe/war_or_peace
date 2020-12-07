@@ -23,21 +23,21 @@ class Turn
       :mutually_assured_destruction
     elsif player1.deck.cards.first.rank == player2.deck.cards.first.rank
       :war
-    else
+    elsif player1.deck.cards[0].rank != player2.deck.cards[0].rank
       :basic
     end
   end
 
   def winner
     if type == :basic && (player1.deck.cards.first.rank > player2.deck.cards.first.rank)
-      player1.name
+          player1.name
     elsif type == :basic && (player1.deck.cards.first.rank < player2.deck.cards.first.rank)
-      player2.name
+         player2.name
     elsif type == :war && (player1.deck.cards[2].rank > player2.deck.cards[2].rank)
-      player1.name
+        player1.name
     elsif type == :war && (player1.deck.cards[2].rank < player2.deck.cards[2].rank)
-      player2.name
-    else
+         player2.name
+    elsif type == :mutually_assured_destruction
       "No Winner"
     end
   end

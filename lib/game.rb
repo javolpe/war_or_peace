@@ -53,16 +53,12 @@ class Game
 
   def start
     i =0
-    while i < 5001
+    while i < 10000
       i+=1
 
-# if i == 200
+# if i == 800
 #   require 'pry';binding.pry
 # end
-
-      type = turn.type
-      determine_winner = turn.winner
-      turn.award_spoils(determine_winner)
 
 
         if turn.player1.has_lost? == true || turn.the_loser == turn.player1.name
@@ -73,29 +69,21 @@ class Game
           break
         end
 
-
-        if determine_winner == turn.player1.name && type == :basic
-            p "Turn#{i}: #{turn.player1.name} has won 2 Cards"
-        elsif determine_winner == turn.player2.name && type == :basic
-            p "Turn#{i}: #{turn.player2.name} has won 2 Cards"
-        elsif determine_winner == turn.player1.name && type == :war
-            p "Turn#{i}: WAR - #{turn.player1.name} has won 6 Cards"
-        elsif determine_winner == turn.player2.name && type == :war
-                p "Turn#{i}: WAR - #{turn.player2.name} has won 6 Cards"
-        else p "Turn#{i}: *mutually assured destruction* 6 cards removed from play"
+        if turn.type == :basic
+          determine_winner = turn.winner
+          p "Turn#{i}: #{determine_winner} has won 2 Cards"
+          turn.award_spoils(determine_winner)
+        elsif turn.type == :war
+          determine_winner = turn.winner
+          p "Turn#{i}: #{determine_winner} has won 2 Cards"
+          turn.award_spoils(determine_winner)
+        elsif
+          determine_winner = turn.winner
+          p "Turn#{i}: #{determine_winner} has won 2 Cards"
+          turn.award_spoils(determine_winner)
         end
 
-
-
-
-
-
-
-
-
-
-
-      if i == 5000
+      if i == 10000
         return p "---- DRAW ----"
       end
 

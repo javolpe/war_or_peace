@@ -30,7 +30,7 @@ class Deck
     (percent * 100).round(2)
   end
 
-  def remove_card()
+  def remove_card
     cards.delete_at(0)
   end
 

@@ -23,7 +23,11 @@ turn = Turn.new(player1, player2)
 
 new_game = Game.new(turn)
 
-#new_game.turn.player1.deck.cards
-#new_game.turn.player2.deck.cards
-
 new_game.intro
+
+
+# There is a bug that occurs where infinitely Megan and Aurora take turns each winning 2 cards on to infinity
+# That bug lead me to finding some smaller bugs but I could not find the pattern that lead to that specific bug
+# Sometimes it occurs early around turn 500, other times I've seen it occur as late as turn 1,700 & 2,200
+# Looking forward to feedback on what went wrong in my code
+# Found a few other bugs too and can't seem to track them down

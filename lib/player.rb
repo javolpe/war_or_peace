@@ -9,7 +9,11 @@ class Player
   end
 
   def has_lost?
-    @deck.cards.empty?
+    if deck.cards[0].nil?
+      true
+    elsif deck.cards[0].nil? == false
+      false
+    end
   end
 
 end
